@@ -9,6 +9,7 @@
 		
 		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="custom/custom.css">
 		
 		<!-- Insert this line above script imports  -->
 		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
@@ -87,6 +88,15 @@
 		</style>
 	</head>
 	<body id="body">
+
+		<div id="wall-backdrop">
+			<button class="btn-close-wall">Tutup</button>
+			<div class="wall-wrapper">
+				<div class="karya-group-scroll">
+				</div>
+			</div>
+		</div>
+
 	    <div id="container" style="color: black;"></div>
     	<div id="loading" class="fullwrapper" style="display: table; width: 100%; height: 100%;">
     		<div style="display: table-cell; vertical-align: middle; text-align: center; color: white; font-size: 30px; padding: 50px;">
@@ -100,9 +110,37 @@
 		</div>
 
     	<script>
+			var peserta = JSON.parse(localStorage.getItem('peserta'));
+
+			$(document).ready(function () {
+				$('.btn-close-wall').click(function () {
+					$('#wall-backdrop').hide();
+				});
+			});
 			
-    		function getWall(start,end){
-    			alert(start+' '+end);
+    		function getWall(start, end) {
+				console.log(start + ' ' + end);
+    			let realStartId = start;
+				let realEndId = end;
+
+				let list = [];
+				for (let i = realStartId; i <= realEndId; i++) {
+					list.push(i);
+				}
+
+				$('.karya-group-scroll').empty();
+				
+				list.forEach(function (data) {
+					$('.karya-group-scroll').append(`
+						<div class="karya">
+							<img src="http://localhost/infex-frontend/assets/image/${data}.jpg">
+						</div>
+
+					`);
+				});
+
+
+				$('#wall-backdrop').show();
     		}
 
     		function getData(id,type){
@@ -118,7 +156,8 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 			viewer.addUpdateCallback(function(){});
 			
 			/*panoramas*/
-var Panorama_1 = new PANOLENS.ImagePanorama( "panoramas/Panorama_1.jpg" );
+
+var Panorama_1 = new PANOLENS.ImagePanorama( "panoramas/Panorama_1.jpg" );
 						Panorama_1.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -128,14 +167,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_1.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_10 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_10 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_10.position.set( -115.41, -696.89, -4942.49 );
 							Panorama_1.add(infospotPanorama_10);
-infospotPanorama_10.addEventListener('click', function(){
-viewer.setPanorama( Panorama_2 );
-});
-viewer.add( Panorama_1 );
-var Panorama_2 = new PANOLENS.ImagePanorama( "panoramas/Panorama_2.jpg" );
+
+infospotPanorama_10.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_2 );
+
+});
+
+viewer.add( Panorama_1 );
+
+var Panorama_2 = new PANOLENS.ImagePanorama( "panoramas/Panorama_2.jpg" );
 						Panorama_2.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -145,32 +190,50 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_2.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_20 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_20 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_20.position.set( 35.61, -611.40, -4956.79 );
 							Panorama_2.add(infospotPanorama_20);
-infospotPanorama_20.addEventListener('click', function(){
-viewer.setPanorama( Panorama_3 );
-});
-var infospotPanorama_21 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_20.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_3 );
+
+});
+
+var infospotPanorama_21 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_21.position.set( -2528.58, -172.83, -4303.48 );
 							Panorama_2.add(infospotPanorama_21);
-infospotPanorama_21.addEventListener('click', function(){
-getWall(31,35);
-});
-var infospotPanorama_22 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_21.addEventListener('click', function(){
+
+getWall(31,35);
+
+});
+
+var infospotPanorama_22 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_22.position.set( 1110.08, 135.48, -4866.34 );
 							Panorama_2.add(infospotPanorama_22);
-infospotPanorama_22.addEventListener('click', function(){
-viewer.setPanorama( Panorama_3 );
-});
-var infospotPanorama_23 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+infospotPanorama_22.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_3 );
+
+});
+
+var infospotPanorama_23 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_23.position.set( -25.48, -1153.43, 4863.26 );
 							Panorama_2.add(infospotPanorama_23);
-infospotPanorama_23.addEventListener('click', function(){
-viewer.setPanorama( Panorama_1 );
-});
-viewer.add( Panorama_2 );
-var Panorama_3 = new PANOLENS.ImagePanorama( "panoramas/Panorama_3.jpg" );
+
+infospotPanorama_23.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_1 );
+
+});
+
+viewer.add( Panorama_2 );
+
+var Panorama_3 = new PANOLENS.ImagePanorama( "panoramas/Panorama_3.jpg" );
 						Panorama_3.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -180,32 +243,50 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_3.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_30 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_30 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_30.position.set( -1618.33, -532.96, -4692.87 );
 							Panorama_3.add(infospotPanorama_30);
-infospotPanorama_30.addEventListener('click', function(){
-viewer.setPanorama( Panorama_4 );
-});
-var infospotPanorama_31 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_30.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_4 );
+
+});
+
+var infospotPanorama_31 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_31.position.set( 2973.30, 303.21, -4001.94 );
 							Panorama_3.add(infospotPanorama_31);
-infospotPanorama_31.addEventListener('click', function(){
-getWall(36,40);
-});
-var infospotPanorama_32 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_31.addEventListener('click', function(){
+
+getWall(36,40);
+
+});
+
+var infospotPanorama_32 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_32.position.set( -4726.87, 365.66, 1579.06 );
 							Panorama_3.add(infospotPanorama_32);
-infospotPanorama_32.addEventListener('click', function(){
-getWall(31,35);
-});
-var infospotPanorama_33 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+infospotPanorama_32.addEventListener('click', function(){
+
+getWall(31,35);
+
+});
+
+var infospotPanorama_33 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_33.position.set( -108.44, -1307.00, 4816.75 );
 							Panorama_3.add(infospotPanorama_33);
-infospotPanorama_33.addEventListener('click', function(){
-viewer.setPanorama( Panorama_2 );
-});
-viewer.add( Panorama_3 );
-var Panorama_4 = new PANOLENS.ImagePanorama( "panoramas/Panorama_4.jpg" );
+
+infospotPanorama_33.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_2 );
+
+});
+
+viewer.add( Panorama_3 );
+
+var Panorama_4 = new PANOLENS.ImagePanorama( "panoramas/Panorama_4.jpg" );
 						Panorama_4.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -215,32 +296,50 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_4.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_40 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_40 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_40.position.set( -2904.21, -723.00, -4002.67 );
 							Panorama_4.add(infospotPanorama_40);
-infospotPanorama_40.addEventListener('click', function(){
-viewer.setPanorama( Panorama_5 );
-});
-var infospotPanorama_41 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+infospotPanorama_40.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_5 );
+
+});
+
+var infospotPanorama_41 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_41.position.set( 1541.09, -911.36, 4663.48 );
 							Panorama_4.add(infospotPanorama_41);
-infospotPanorama_41.addEventListener('click', function(){
-viewer.setPanorama( Panorama_3 );
-});
-var infospotPanorama_42 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_41.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_3 );
+
+});
+
+var infospotPanorama_42 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_42.position.set( 3269.92, 221.08, 3765.89 );
 							Panorama_4.add(infospotPanorama_42);
-infospotPanorama_42.addEventListener('click', function(){
-alert('needs more pano')
-});
-var infospotPanorama_43 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_42.addEventListener('click', function(){
+
+alert('needs more pano')
+
+});
+
+var infospotPanorama_43 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_43.position.set( -1214.42, 68.44, -4841.10 );
 							Panorama_4.add(infospotPanorama_43);
-infospotPanorama_43.addEventListener('click', function(){
-viewer.setPanorama( Panorama_5 );
-});
-viewer.add( Panorama_4 );
-var Panorama_5 = new PANOLENS.ImagePanorama( "panoramas/Panorama_5.jpg" );
+
+infospotPanorama_43.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_5 );
+
+});
+
+viewer.add( Panorama_4 );
+
+var Panorama_5 = new PANOLENS.ImagePanorama( "panoramas/Panorama_5.jpg" );
 						Panorama_5.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -250,14 +349,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_5.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_50 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_50 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_50.position.set( -4502.23, -1213.36, 1783.07 );
 							Panorama_5.add(infospotPanorama_50);
-infospotPanorama_50.addEventListener('click', function(){
-viewer.setPanorama( Panorama_6 );
-});
-viewer.add( Panorama_5 );
-var Panorama_6 = new PANOLENS.ImagePanorama( "panoramas/Panorama_6.jpg" );
+
+infospotPanorama_50.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_6 );
+
+});
+
+viewer.add( Panorama_5 );
+
+var Panorama_6 = new PANOLENS.ImagePanorama( "panoramas/Panorama_6.jpg" );
 						Panorama_6.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -267,20 +372,30 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_6.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_60 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+var infospotPanorama_60 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_60.position.set( -4995.34, 82.64, -26.92 );
 							Panorama_6.add(infospotPanorama_60);
-infospotPanorama_60.addEventListener('click', function(){
-viewer.setPanorama( Panorama_6_detail );
-});
-var infospotPanorama_61 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+infospotPanorama_60.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_6_detail );
+
+});
+
+var infospotPanorama_61 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_61.position.set( -782.35, -1431.19, 4716.52 );
 							Panorama_6.add(infospotPanorama_61);
-infospotPanorama_61.addEventListener('click', function(){
-viewer.setPanorama( Panorama_7 );
-});
-viewer.add( Panorama_6 );
-var Panorama_6_detail = new PANOLENS.ImagePanorama( "panoramas/Panorama_6_detail.jpg" );
+
+infospotPanorama_61.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_7 );
+
+});
+
+viewer.add( Panorama_6 );
+
+var Panorama_6_detail = new PANOLENS.ImagePanorama( "panoramas/Panorama_6_detail.jpg" );
 						Panorama_6_detail.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -290,14 +405,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_6_detail.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_6_detail0 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_6_detail0 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_6_detail0.position.set( 1950.64, -1197.39, 4442.73 );
 							Panorama_6_detail.add(infospotPanorama_6_detail0);
-infospotPanorama_6_detail0.addEventListener('click', function(){
-viewer.setPanorama( Panorama_7 );
-});
-viewer.add( Panorama_6_detail );
-var Panorama_7 = new PANOLENS.ImagePanorama( "panoramas/Panorama_7.jpg" );
+
+infospotPanorama_6_detail0.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_7 );
+
+});
+
+viewer.add( Panorama_6_detail );
+
+var Panorama_7 = new PANOLENS.ImagePanorama( "panoramas/Panorama_7.jpg" );
 						Panorama_7.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -307,20 +428,30 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_7.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_70 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_70 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_70.position.set( -2076.51, -1325.74, 4340.96 );
 							Panorama_7.add(infospotPanorama_70);
-infospotPanorama_70.addEventListener('click', function(){
-viewer.setPanorama( Panorama_8 );
-});
-var infospotPanorama_71 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_70.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_8 );
+
+});
+
+var infospotPanorama_71 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_71.position.set( -3833.28, 283.87, 3182.78 );
 							Panorama_7.add(infospotPanorama_71);
-infospotPanorama_71.addEventListener('click', function(){
-viewer.setPanorama( Panorama_8 );
-});
-viewer.add( Panorama_7 );
-var Panorama_8 = new PANOLENS.ImagePanorama( "panoramas/Panorama_8.jpg" );
+
+infospotPanorama_71.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_8 );
+
+});
+
+viewer.add( Panorama_7 );
+
+var Panorama_8 = new PANOLENS.ImagePanorama( "panoramas/Panorama_8.jpg" );
 						Panorama_8.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -330,14 +461,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_8.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_80 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_80 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_80.position.set( 1803.04, -834.40, 4579.30 );
 							Panorama_8.add(infospotPanorama_80);
-infospotPanorama_80.addEventListener('click', function(){
-viewer.setPanorama( Panorama_9 );
-});
-viewer.add( Panorama_8 );
-var Panorama_9 = new PANOLENS.ImagePanorama( "panoramas/Panorama_9.jpg" );
+
+infospotPanorama_80.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_9 );
+
+});
+
+viewer.add( Panorama_8 );
+
+var Panorama_9 = new PANOLENS.ImagePanorama( "panoramas/Panorama_9.jpg" );
 						Panorama_9.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -347,14 +484,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_9.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_90 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+var infospotPanorama_90 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_90.position.set( 1400.34, 503.17, 4764.56 );
 							Panorama_9.add(infospotPanorama_90);
-infospotPanorama_90.addEventListener('click', function(){
-viewer.setPanorama( Panorama_9_detail );
-});
-viewer.add( Panorama_9 );
-var Panorama_9_detail = new PANOLENS.ImagePanorama( "panoramas/Panorama_9_detail.jpg" );
+
+infospotPanorama_90.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_9_detail );
+
+});
+
+viewer.add( Panorama_9 );
+
+var Panorama_9_detail = new PANOLENS.ImagePanorama( "panoramas/Panorama_9_detail.jpg" );
 						Panorama_9_detail.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -364,14 +507,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_9_detail.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_9_detail0 = new PANOLENS.Infospot( 512, hotspotIcons[7].data, true );
+
+var infospotPanorama_9_detail0 = new PANOLENS.Infospot( 512, hotspotIcons[7].data, true );
 							infospotPanorama_9_detail0.position.set( 4907.94, 308.88, -853.45 );
 							Panorama_9_detail.add(infospotPanorama_9_detail0);
-infospotPanorama_9_detail0.addEventListener('click', function(){
-viewer.setPanorama( Panorama_10 );
-});
-viewer.add( Panorama_9_detail );
-var Panorama_10 = new PANOLENS.ImagePanorama( "panoramas/Panorama_10.jpg" );
+
+infospotPanorama_9_detail0.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_10 );
+
+});
+
+viewer.add( Panorama_9_detail );
+
+var Panorama_10 = new PANOLENS.ImagePanorama( "panoramas/Panorama_10.jpg" );
 						Panorama_10.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -381,14 +530,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_10.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_100 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_100 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_100.position.set( 434.11, -1374.38, 4780.68 );
 							Panorama_10.add(infospotPanorama_100);
-infospotPanorama_100.addEventListener('click', function(){
-viewer.setPanorama( Panorama_11 );
-});
-viewer.add( Panorama_10 );
-var Panorama_11 = new PANOLENS.ImagePanorama( "panoramas/Panorama_11.jpg" );
+
+infospotPanorama_100.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_11 );
+
+});
+
+viewer.add( Panorama_10 );
+
+var Panorama_11 = new PANOLENS.ImagePanorama( "panoramas/Panorama_11.jpg" );
 						Panorama_11.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -398,26 +553,40 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_11.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_110 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_110 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_110.position.set( -3564.50, -1004.35, 3347.52 );
 							Panorama_11.add(infospotPanorama_110);
-infospotPanorama_110.addEventListener('click', function(){
-viewer.setPanorama( Panorama_12 );
-});
-var infospotPanorama_111 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+infospotPanorama_110.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_12 );
+
+});
+
+var infospotPanorama_111 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_111.position.set( 1940.04, -416.87, 4584.08 );
 							Panorama_11.add(infospotPanorama_111);
-infospotPanorama_111.addEventListener('click', function(){
-viewer.setPanorama( Panorama_13 );
-});
-var infospotPanorama_112 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+infospotPanorama_111.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_13 );
+
+});
+
+var infospotPanorama_112 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_112.position.set( 289.16, -529.22, 4953.23 );
 							Panorama_11.add(infospotPanorama_112);
-infospotPanorama_112.addEventListener('click', function(){
-viewer.setPanorama( Panorama_14 );
-});
-viewer.add( Panorama_11 );
-var Panorama_12 = new PANOLENS.ImagePanorama( "panoramas/Panorama_12.jpg" );
+
+infospotPanorama_112.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_14 );
+
+});
+
+viewer.add( Panorama_11 );
+
+var Panorama_12 = new PANOLENS.ImagePanorama( "panoramas/Panorama_12.jpg" );
 						Panorama_12.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -427,20 +596,30 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_12.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_120 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
+
+var infospotPanorama_120 = new PANOLENS.Infospot( 512, hotspotIcons[0].data, true );
 							infospotPanorama_120.position.set( 4883.73, -311.74, 1005.59 );
 							Panorama_12.add(infospotPanorama_120);
-infospotPanorama_120.addEventListener('click', function(){
-viewer.setPanorama( Panorama_13 );
-});
-var infospotPanorama_121 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+infospotPanorama_120.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_13 );
+
+});
+
+var infospotPanorama_121 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_121.position.set( 2301.86, -689.24, 4374.42 );
 							Panorama_12.add(infospotPanorama_121);
-infospotPanorama_121.addEventListener('click', function(){
-viewer.setPanorama( Panorama_14 );
-});
-viewer.add( Panorama_12 );
-var Panorama_13 = new PANOLENS.ImagePanorama( "panoramas/Panorama_13.jpg" );
+
+infospotPanorama_121.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_14 );
+
+});
+
+viewer.add( Panorama_12 );
+
+var Panorama_13 = new PANOLENS.ImagePanorama( "panoramas/Panorama_13.jpg" );
 						Panorama_13.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -450,14 +629,20 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_13.addEventListener('click', function(e){
 						});
 
-var infospotPanorama_130 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
+
+var infospotPanorama_130 = new PANOLENS.Infospot( 512, hotspotIcons[1].data, true );
 							infospotPanorama_130.position.set( -113.13, -955.68, 4898.00 );
 							Panorama_13.add(infospotPanorama_130);
-infospotPanorama_130.addEventListener('click', function(){
-viewer.setPanorama( Panorama_14 );
-});
-viewer.add( Panorama_13 );
-var Panorama_14 = new PANOLENS.ImagePanorama( "panoramas/Panorama_14.jpg" );
+
+infospotPanorama_130.addEventListener('click', function(){
+
+viewer.setPanorama( Panorama_14 );
+
+});
+
+viewer.add( Panorama_13 );
+
+var Panorama_14 = new PANOLENS.ImagePanorama( "panoramas/Panorama_14.jpg" );
 						Panorama_14.addEventListener('progress', function(e){
 							$("#loading").show();
 						});
@@ -467,10 +652,13 @@ var viewer = new PANOLENS.Viewer( { container: container , controlBar: false,  o
 						Panorama_14.addEventListener('click', function(e){
 						});
 
-viewer.add( Panorama_14 );
-$(document).ready(function(){ viewer.setPanorama( Panorama_4 ); });
 
-/*panoramas-end*/
+viewer.add( Panorama_14 );
+
+$(document).ready(function(){ viewer.setPanorama( Panorama_4 ); });
+
+
+/*panoramas-end*/
             
 			
 			function hideTemp(){

@@ -1,0 +1,66 @@
+#wall-backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #b3b3b3;
+    display: none;
+}
+
+.wall-wrapper {
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+.karya-group-scroll {
+    overflow: auto;
+    display: flex;
+    min-height: 500px;
+}
+
+.karya {
+    height: 400px;
+    width: 400px;
+    background-color:#fff;  
+    box-shadow: 5px 10px 50px 1px rgb(55, 40, 22, 1),5px 10px 30px 10px rgba(55, 40, 22, 1),0px 4px 5px rgba(55, 40, 22, 1);
+    background-size: contain;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.karya img {
+    width: 400px;
+    max-height: 400px;
+    object-fit: contain;
+}
+.btn-close-wall {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #f8f9fa;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: #000;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+@media (min-width: 992px) {
+    .wall-wrapper {
+        width: 60%;
+    }
+}
