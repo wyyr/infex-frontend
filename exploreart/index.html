@@ -117,6 +117,16 @@
 					$('#wall-backdrop').hide();
 				});
 			});
+
+			function getData(id,type){
+				if (type === '2D') {
+					// show hide 2D
+				} else {
+					// show hide 3D
+				}
+				
+				alert(id+''+type + ' ' + peserta[id].name);
+			}
 			
     		function getWall(start, end) {
 				console.log(start + ' ' + end);
@@ -135,22 +145,21 @@
 				list.forEach(function (data) {
 
 					// di class karya dikasi id/unique attribute, ketika di klik jalankan fungsi getData()
-					console.log(peserta[data - 1]);
+					// karena array peserta dimulai dari 0, jd id nya dikurangi 1
+					indexPeserta = data - 1;
+					console.log(peserta[indexPeserta]);
+					type = peserta[indexPeserta].type // ambil data dari peserta -> ambil typenya aja
+					console.log(type);
 
 					$('.karya-group-scroll').append(`
-						<div class="karya">
-							<img src="/assets/image/${data}.jpg">
+						<div class="karya" onclick="getData(${indexPeserta}, '${type}');">
+							<img src="http://localhost/infex-frontend/assets/image/${data}.jpg">
 						</div>
 
 					`);
 				});
 
 				$('#wall-backdrop').show();
-    		}
-
-    		function getData(id,type){
-
-    			alert(id+''+type);
     		}
 
             var container = document.querySelector( '#container' );
