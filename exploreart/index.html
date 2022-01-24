@@ -117,8 +117,6 @@
 					$('#wall-backdrop').hide();
 				});
 			});
-
-			getWall(31, 35);
 			
     		function getWall(start, end) {
 				console.log(start + ' ' + end);
@@ -135,7 +133,7 @@
 				list.forEach(function (data) {
 					$('.karya-group-scroll').append(`
 						<div class="karya">
-							<img src="http://localhost/infex-frontend/assets/image/${data}.jpg">
+							<img src="/assets/image/${data}.jpg">
 						</div>
 
 					`);
