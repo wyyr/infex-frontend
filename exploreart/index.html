@@ -120,9 +120,11 @@
 			
     		function getWall(start, end) {
 				console.log(start + ' ' + end);
+
     			let realStartId = start;
 				let realEndId = end;
 
+				// loop range, ex: 31 - 35 -> result = [31, 32, 33, 34, 35]
 				let list = [];
 				for (let i = realStartId; i <= realEndId; i++) {
 					list.push(i);
@@ -131,6 +133,8 @@
 				$('.karya-group-scroll').empty();
 				
 				list.forEach(function (data) {
+
+					// di class karya dikasi id/unique attribute, ketika di klik jalankan fungsi getData()
 					$('.karya-group-scroll').append(`
 						<div class="karya">
 							<img src="/assets/image/${data}.jpg">
